@@ -2,7 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const notFound = require('./middleware/notFound');
 const serverError = require('./middleware/serverError');
-const http = require('http');
 const dotenv = require('dotenv');
 dotenv.config({path: ".env"});
 const mongoose = require('mongoose');
