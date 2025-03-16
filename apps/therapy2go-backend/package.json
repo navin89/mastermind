@@ -1,5 +1,9 @@
 {
   "name": "therapy2go-backend",
+  "engines": {
+    "node": "20.12.0",
+    "npm": "10.9.0"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
