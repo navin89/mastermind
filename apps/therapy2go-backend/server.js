@@ -12,7 +12,7 @@ const productRoutes = require('./routes/productRoutes');
 
 mongoose.connect(process.env.MONGO_URL, {})
     .then((res) => {
-        console.log("Mongo DB connected");
+        console.log("mongo db connected with ready-state value::", res.connection.readyState);
     })
     .catch((error) => {
         console.log(error);
@@ -43,13 +43,6 @@ app.use(morgan("common"));
 app.use(notFound);
 //Server Error Middleware Handler
 app.use(serverError)
-
-const requestListener = function (req, res) {
-    res.statusCode = 200;
-    res.end("My first server!");
-}
-
-const server = http.createServer(requestListener);
 
 app.listen(PORT, () => {
     console.log(`therapy2go backend-middleware-server successfully started on port ${PORT}`);
