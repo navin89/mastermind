@@ -10,6 +10,6 @@ export const appRoutes: Route[] = [
   {
     path: 'therapienow-products',
     loadComponent: () =>
-      import('@mastermind/products').then((m) => m.ProductsComponent)
+      import('libs/products/src').then((m) => m.ProductsComponent)
   }
 ];

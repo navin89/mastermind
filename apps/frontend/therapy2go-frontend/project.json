@@ -1,6 +1,6 @@
 {
   "name": "therapy2go-frontend",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/therapy2go-frontend/src",
