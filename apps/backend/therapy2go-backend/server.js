@@ -34,7 +34,7 @@ app.use(express.urlencoded({extended: true}));
 
 //configure api from api route
 app.use('/api', api)
-app.use('/api/course', productRoutes)
+app.use('/api/products', productRoutes)
 
 app.use(express.json());
 app.use(morgan("common"));
