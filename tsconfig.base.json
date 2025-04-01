@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@mastermind/header": ["libs/shared/ui/header/src/index.ts"],
       "@mastermind/products": ["libs/products/src/index.ts"]
     }
   },
