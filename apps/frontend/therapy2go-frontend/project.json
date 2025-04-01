@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/frontend/therapy2go-frontend",
         "index": "apps/frontend/therapy2go-frontend/src/index.html",
         "browser": "apps/frontend/therapy2go-frontend/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/frontend/therapy2go-frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +26,10 @@
             "input": "apps/frontend/therapy2go-frontend/public"
           }
         ],
-        "styles": ["apps/frontend/therapy2go-frontend/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/azure-blue.css",
+          "apps/frontend/therapy2go-frontend/src/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/frontend/therapy2go-frontend/src/main.server.ts",
         "ssr": {
@@ -77,7 +84,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/frontend/therapy2go-frontend/jest.config.ts"
       }
