@@ -1,0 +1,50 @@
+@use '@angular/material' as mat;
+
+// Include the styles for Angular header component
+// Navbar styles
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  @include mat.elevation-transition;
+  @include mat.elevation(2, #5ba289, 0.8);
+
+  &:active {
+    @include mat.elevation(6, #66726c, 0.8);
+  }
+
+  .navbar-brand-box {
+    display: flex;
+
+    .navbar-brand-icon-box {
+      margin-right: 1rem;
+    }
+
+    .navbar-brand-title-box {
+      margin-right: 1rem;
+
+      .brand-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .desktop-nav-box {
+    display: flex;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .mobile-menu-button {
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+}
