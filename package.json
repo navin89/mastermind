@@ -2,7 +2,9 @@
   "name": "@mastermind/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "source-map-explorer": "source-map-explorer dist/apps/frontend/therapy2go-frontend/browser/main*.js"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.4",
@@ -57,6 +59,7 @@
     "jest-preset-angular": "~14.4.0",
     "nx": "20.6.2",
     "prettier": "^2.6.2",
+    "source-map-explorer": "^2.5.3",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",

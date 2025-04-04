@@ -12,6 +12,7 @@
         "{options.outputPath}"
       ],
       "options": {
+        "sourceMap": true,
         "outputPath": "dist/apps/frontend/therapy2go-frontend",
         "index": "apps/frontend/therapy2go-frontend/src/index.html",
         "browser": "apps/frontend/therapy2go-frontend/src/main.ts",
@@ -39,6 +40,9 @@
       },
       "configurations": {
         "production": {
+          "optimization": true,
+          "sourceMap": true,
+          "namedChunks": true,
           "budgets": [
             {
               "type": "initial",
@@ -55,8 +59,7 @@
         },
         "development": {
           "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true
+          "extractLicenses": false
         }
       },
       "defaultConfiguration": "production"
