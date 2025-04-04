@@ -5,8 +5,8 @@ const serverError = require('./middleware/serverError');
 const dotenv = require('dotenv');
 dotenv.config({path: ".env"});
 const mongoose = require('mongoose');
-const api = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');
+const authenticationRoute = require('./routes/userRoutes');
+const productRoute = require('./routes/productRoutes');
 
 
 mongoose.connect(process.env.MONGO_URL, {})
@@ -32,9 +32,9 @@ app.use(function (req, res, next) {
 
 app.use(express.urlencoded({extended: true}));
 
-//configure api from api route
-app.use('/api', api)
-app.use('/api/products', productRoutes)
+//configure authenticationRoute from authenticationRoute route
+app.use('/authenticationRoute', authenticationRoute)
+app.use('/authenticationRoute/products', productRoute)
 
 app.use(express.json());
 app.use(morgan("common"));
