@@ -42,6 +42,7 @@ html {
 
 // flex value is set to 1; to stretch it through the html height
 body {
+  padding-top: 66px;
   flex: 1;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
