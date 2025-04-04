@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,9 +27,33 @@ import { navbarAnimations } from './header.animations';
     navbarAnimations.fadeInOut,
     navbarAnimations.rotate,
     navbarAnimations.fadeInOut,
+    navbarAnimations.rotateOnScroll,
+    navbarAnimations.rotateXOnScroll
   ],
 })
 export class HeaderComponent {
+
+  rotationState = 'normal';
+  lastScrollPosition = 0;
+  scrollThreshold = 100; // Adjust this value for sensitivity
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    const currentScrollPosition = window.scrollY;
+    console.log(currentScrollPosition);
+
+    if (currentScrollPosition > this.lastScrollPosition + this.scrollThreshold) {
+      // Scrolling down
+      this.rotationState = 'rotated';
+      this.lastScrollPosition = currentScrollPosition;
+    } else if (currentScrollPosition < this.lastScrollPosition - this.scrollThreshold) {
+      // Scrolling up
+      this.rotationState = 'normal';
+      this.lastScrollPosition = currentScrollPosition;
+    }
+  }
+
+
   // For slideInOut animation
   menuState = 'out';
 

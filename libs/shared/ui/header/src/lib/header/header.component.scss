@@ -5,7 +5,20 @@
 mat-toolbar {
   position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 24px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+
   @include mat.elevation-transition;
   @include mat.elevation(2, #5ba289, 0.8);
 
@@ -35,7 +48,10 @@ mat-toolbar {
   }
 
   .desktop-nav-box {
+    width: 100%;
     display: flex;
+    align-items: center;
+    transform-style: preserve-3d;
 
     @media (min-width: 768px) {
       display: flex;
