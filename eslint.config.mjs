@@ -37,6 +37,13 @@ export default [
       '**/*.mjs',
     ],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@nx/enforce-module-boundaries': [
+        'error',
+        {
+          checkDynamicDependenciesExceptions: ['@mastermind/therapy2go-frontend/component/app.routes.ts']
+        }
+      ]
+    },
   },
 ];

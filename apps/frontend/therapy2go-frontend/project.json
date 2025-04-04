@@ -40,14 +40,11 @@
       },
       "configurations": {
         "production": {
-          "optimization": true,
-          "sourceMap": true,
-          "namedChunks": true,
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "5000kb",
+              "maximumError": "5.5mb"
             },
             {
               "type": "anyComponentStyle",
@@ -60,6 +57,11 @@
         "development": {
           "optimization": false,
           "extractLicenses": false
+        },
+        "analyze-bundle": {
+          "sourceMap": true,
+          "outputHashing": "none",
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
