@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGO_URL, {})
     });
 
 const app = express()
-const PORT = process.env.PORT || 8200
+const PORT = process.env.PORT || 8081
 
 // Enable CORS for a specific origin
 // Set up CORS
@@ -34,7 +34,7 @@ app.use(express.urlencoded({extended: true}));
 
 //configure authenticationRoute from authenticationRoute route
 app.use('/authenticationRoute', authenticationRoute)
-app.use('/authenticationRoute/products', productRoute)
+app.use('/api/products', productRoute)
 
 app.use(express.json());
 app.use(morgan("common"));
