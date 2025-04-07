@@ -1,7 +1,9 @@
 {
   "name": "@mastermind/source",
-  "version": "0.0.0",
-  "license": "MIT",
+  "engines": {
+    "node": "22.9.0"
+  },
+  "version": "5.0.0",
   "scripts": {
     "build:frontend:production": "npx nx build therapy2go-frontend --configuration=production",
     "build:frontend:uat": "npx nx build therapy2go-frontend --configuration=uat",
