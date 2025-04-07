@@ -4,16 +4,21 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/frontend/therapy2go-frontend/src",
-  "tags": [],
+  "tags": ["type:frontend", "scope:therapienow"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
+        "sourceMap": true,
         "outputPath": "dist/apps/frontend/therapy2go-frontend",
         "index": "apps/frontend/therapy2go-frontend/src/index.html",
         "browser": "apps/frontend/therapy2go-frontend/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/frontend/therapy2go-frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +27,10 @@
             "input": "apps/frontend/therapy2go-frontend/public"
           }
         ],
-        "styles": ["apps/frontend/therapy2go-frontend/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/azure-blue.css",
+          "apps/frontend/therapy2go-frontend/src/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/frontend/therapy2go-frontend/src/main.server.ts",
         "ssr": {
@@ -32,11 +40,18 @@
       },
       "configurations": {
         "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
+              "with": "apps/frontend/therapy2go-frontend/src/environments/environment.production.ts"
+            }
+          ],
+          "optimization": true,
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "5000kb",
+              "maximumError": "5.5mb"
             },
             {
               "type": "anyComponentStyle",
@@ -44,12 +59,46 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "aot": true
+        },
+        "uat": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
+              "with": "apps/frontend/therapy2go-frontend/src/environments/environment.uat.ts"
+            }
+          ],
+          "optimization": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "5000kb",
+              "maximumError": "5.5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all",
+          "aot": true
         },
         "development": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
+              "with": "apps/frontend/therapy2go-frontend/src/environments/environment.development.ts"
+            }
+          ],
           "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true
+          "extractLicenses": false
+        },
+        "analyze-bundle": {
+          "sourceMap": true,
+          "outputHashing": "none",
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
@@ -59,6 +108,9 @@
       "configurations": {
         "production": {
           "buildTarget": "therapy2go-frontend:build:production"
+        },
+        "uat": {
+          "buildTarget": "therapy2go-frontend:build:uat"
         },
         "development": {
           "buildTarget": "therapy2go-frontend:build:development"
@@ -77,7 +129,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/frontend/therapy2go-frontend/jest.config.ts"
       }

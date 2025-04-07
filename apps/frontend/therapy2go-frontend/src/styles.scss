@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as material;
+@use 'sass:map';
+
+@include material.core();
+
+$therapienow-primary: material.m2-define-palette(material.$m2-amber-palette);
+$therapienow-accent: material.m2-define-palette(material.$m2-pink-palette);
+
+// Extra Colors
+$therapienow-success: material.m2-define-palette(material.$m2-green-palette);
+$therapienow-info: material.m2-define-palette(material.$m2-blue-palette);
+
+$therapienow-theme: material.m2-define-light-theme(
+    (
+      color: (
+        primary: $therapienow-primary,
+        accent: $therapienow-accent,
+      )
+    )
+);
+
+$therapienow-theme: map.deep-merge($therapienow-theme, (
+  success: $therapienow-success,
+  info: $therapienow-info,
+  color: (
+    success: $therapienow-success,
+    info: $therapienow-info
+  )
+));
+
+//@debug $therapienow-theme;
+
+@include material.all-component-themes($therapienow-theme);
+
+// min-height is stretched to the full minimal viewport height
+// flexbox is used to turn it into a container using the vertical main axis
+html {
+  min-height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+
+// flex value is set to 1; to stretch it through the html height
+body {
+  padding-top: 66px;
+  flex: 1;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

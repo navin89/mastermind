@@ -20,6 +20,30 @@ export default [
               sourceTag: '*',
               onlyDependOnLibsWithTags: ['*'],
             },
+            {
+              sourceTag: 'type:frontend',
+              onlyDependOnLibsWithTags: ['type:feature', 'type:ui'],
+            },
+            {
+              sourceTag: 'scope:therapienow',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:products'],
+            },
+            {
+              sourceTag: 'type:feature',
+              onlyDependOnLibsWithTags: ['type:feature', 'type:ui'],
+            },
+            {
+              sourceTag: 'type:ui',
+              onlyDependOnLibsWithTags: ['type:ui'],
+            },
+            {
+              sourceTag: 'scope:products',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+            {
+              sourceTag: 'scope:shared',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            }
           ],
         },
       ],
