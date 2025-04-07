@@ -40,6 +40,13 @@
       },
       "configurations": {
         "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
+              "with": "apps/frontend/therapy2go-frontend/src/environments/environment.production.ts"
+            }
+          ],
+          "optimization": true,
           "budgets": [
             {
               "type": "initial",
@@ -52,9 +59,39 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "aot": true
+        },
+        "uat": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
+              "with": "apps/frontend/therapy2go-frontend/src/environments/environment.uat.ts"
+            }
+          ],
+          "optimization": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "5000kb",
+              "maximumError": "5.5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all",
+          "aot": true
         },
         "development": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
+              "with": "apps/frontend/therapy2go-frontend/src/environments/environment.development.ts"
+            }
+          ],
           "optimization": false,
           "extractLicenses": false
         },
@@ -71,6 +108,9 @@
       "configurations": {
         "production": {
           "buildTarget": "therapy2go-frontend:build:production"
+        },
+        "uat": {
+          "buildTarget": "therapy2go-frontend:build:uat"
         },
         "development": {
           "buildTarget": "therapy2go-frontend:build:development"

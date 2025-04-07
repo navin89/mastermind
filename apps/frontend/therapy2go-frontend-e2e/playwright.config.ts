@@ -6,7 +6,7 @@ import { workspaceRoot } from '@nx/devkit';
 const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
 
 /**
- * Read environment variables from file.
+ * Read environmentDevelopment variables from file.
  * https://github.com/motdotla/dotenv
  */
 // require('dotenv').config();

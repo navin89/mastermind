@@ -3,6 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "build:frontend:production": "npx nx build therapy2go-frontend --configuration=production",
+    "build:frontend:uat": "npx nx build therapy2go-frontend --configuration=uat",
+    "build:frontend:development": "npx nx build therapy2go-frontend --configuration=development",
+    "serve:frontend:production": "npx nx serve therapy2go-frontend --configuration=production",
+    "serve:frontend:uat": "npx nx serve therapy2go-frontend --configuration=uat",
+    "serve:frontend:development": "npx nx serve therapy2go-frontend --configuration=development",
     "analyze-bundle": "source-map-explorer dist/apps/frontend/therapy2go-frontend/browser/**/*.js --no-border-checks"
   },
   "private": true,
