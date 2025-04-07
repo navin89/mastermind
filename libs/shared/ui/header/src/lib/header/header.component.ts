@@ -40,7 +40,6 @@ export class HeaderComponent {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     const currentScrollPosition = window.scrollY;
-    console.log(currentScrollPosition);
 
     if (currentScrollPosition > this.lastScrollPosition + this.scrollThreshold) {
       // Scrolling down
