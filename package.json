@@ -28,7 +28,13 @@
     "@angular/router": "~19.2.0",
     "@angular/ssr": "~19.2.0",
     "express": "^4.21.2",
+    "loose-envify": "^1.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-refresh": "^0.17.0",
     "rxjs": "~7.8.0",
+    "scheduler": "^0.26.0",
+    "yaml": "^2.7.1",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
