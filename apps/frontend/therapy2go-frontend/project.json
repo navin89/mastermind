@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/frontend/therapy2go-frontend/src",
-  "tags": [],
+  "tags": ["type:frontend", "scope:therapienow"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
