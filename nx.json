@@ -15,12 +15,6 @@
     ],
     "sharedGlobals": []
   },
-  "build": {
-    "options": {
-      "baseHref": "/",
-      "deployUrl": "/"
-    }
-  },
   "nxCloudId": "67e197af462fce2386ae1772",
   "targetDefaults": {
     "@angular-devkit/build-angular:application": {
