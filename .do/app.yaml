@@ -6,4 +6,4 @@ static_sites:
       deploy_on_push: true
     source_dir: /
     build_command: npm install && npm run build:frontend:uat
-    output_dir: dist/apps/frontend/therapy2go-frontend
+    output_dir: workspace/dist/apps/frontend/therapy2go-frontend
