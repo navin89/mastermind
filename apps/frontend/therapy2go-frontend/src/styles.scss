@@ -1,19 +1,20 @@
-@use '@angular/material' as material;
+@use '@angular/material' as mat;
 @use 'sass:map';
 
-@include material.core();
 
-$therapienow-primary: material.m2-define-palette(material.$m2-amber-palette);
-$therapienow-accent: material.m2-define-palette(material.$m2-pink-palette);
+@include mat.core();
+
+$primary: mat.m2-define-palette(mat.$m2-amber-palette);
+$therapienow-accent: mat.m2-define-palette(mat.$m2-pink-palette);
 
 // Extra Colors
-$therapienow-success: material.m2-define-palette(material.$m2-green-palette);
-$therapienow-info: material.m2-define-palette(material.$m2-blue-palette);
+$therapienow-success: mat.m2-define-palette(mat.$m2-green-palette);
+$therapienow-info: mat.m2-define-palette(mat.$m2-blue-palette);
 
-$therapienow-theme: material.m2-define-light-theme(
+$therapienow-theme: mat.m2-define-light-theme(
     (
       color: (
-        primary: $therapienow-primary,
+        primary: $primary,
         accent: $therapienow-accent,
       )
     )
@@ -30,7 +31,7 @@ $therapienow-theme: map.deep-merge($therapienow-theme, (
 
 //@debug $therapienow-theme;
 
-@include material.all-component-themes($therapienow-theme);
+@include mat.all-component-themes($therapienow-theme);
 
 // min-height is stretched to the full minimal viewport height
 // flexbox is used to turn it into a container using the vertical main axis
@@ -44,5 +45,5 @@ html {
 body {
   padding-top: 66px;
   flex: 1;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Lucida Grande", sans-serif;
 }
