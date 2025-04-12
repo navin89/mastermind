@@ -62,6 +62,18 @@ export const navbarAnimations = {
     state('default', style({ transform: 'rotate(0)' })),
     state('rotated', style({ transform: 'rotate(180deg)' })),
     transition('default <=> rotated', animate('200ms ease-in'))
+  ]),
+
+
+  slideDown: trigger('slideDown', [
+    transition(':enter', [
+      style({ height: 0, opacity: 0, overflow: 'hidden' }),
+      animate('300ms ease-out', style({ height: '*', opacity: 1 }))
+    ]),
+    transition(':leave', [
+      style({ height: '*', opacity: 1, overflow: 'hidden' }),
+      animate('300ms ease-in', style({ height: 0, opacity: 0 }))
+    ])
   ])
 };
 
