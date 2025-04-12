@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../services/api.service';
-import { BrowserModule } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -9,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-home.component',
@@ -33,14 +33,14 @@ export class HomeComponent implements OnInit {
   faqs = [];
   testimonials = [];
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private logger: NGXLogger ) {
     this.apiService.getProductData().subscribe((objResult) => {
       console.log(JSON.stringify(objResult));
     });
   }
 
   ngOnInit(): void {
-    console.log('The home component is initialized');
+    this.logger.info('Home component loaded');
   }
 }
 

@@ -68,13 +68,15 @@
           "aot": true
         },
         "uat": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
           "fileReplacements": [
             {
               "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
               "with": "apps/frontend/therapy2go-frontend/src/environments/environment.uat.ts"
             }
           ],
-          "optimization": true,
           "budgets": [
             {
               "type": "initial",
@@ -86,9 +88,7 @@
               "maximumWarning": "5000kb",
               "maximumError": "5.5mb"
             }
-          ],
-          "outputHashing": "all",
-          "aot": true
+          ]
         },
         "development": {
           "fileReplacements": [

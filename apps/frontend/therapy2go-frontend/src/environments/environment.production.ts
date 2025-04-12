@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  isProduction: true,
   domain: 'https://api.therapienow.com',
 };

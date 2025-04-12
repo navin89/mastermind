@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { environment } from '../environments/environment.uat';
+import { DatePipe } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +22,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
+    provideHttpClient(),
+    DatePipe,
     importProvidersFrom(
       BrowserAnimationsModule,
       BrowserModule,
@@ -31,7 +36,14 @@ export const appConfig: ApplicationConfig = {
       MatListModule,
       // Bootstrap
       NgbCollapseModule,
-    ),
-    provideHttpClient()
+      LoggerModule.forRoot({
+        serverLoggingUrl: `${environment.domain}/log`,
+        level: environment.isProduction ? NgxLoggerLevel.ERROR : NgxLoggerLevel.DEBUG,
+        serverLogLevel: NgxLoggerLevel.INFO,
+        httpResponseType: 'json',
+        timestampFormat: 'yyyy-MM-dd HH:mm:ss.SSS',
+        enableSourceMaps: true
+      })
+    )
   ],
 };
