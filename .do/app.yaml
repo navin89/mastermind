@@ -10,3 +10,6 @@ static_sites:
     routes:
       - path: /
     environment_slug: angular-frontend
+envs:
+  - key: NPM_CONFIG_LEGACY_PEER_DEPS
+    value: 'true'
