@@ -1,22 +1,50 @@
-<div class="container-fluid text-left">
-  <div class="row">
-    <div class="col">
-      There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
-      or randomised words which don't look even slightly believable.
-      If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
-      All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-      making this the first true generator on the Internet.
+<main class="container mt-5 pt-4">
+<!--   Hero Section -->
+  <section class="hero-section row align-items-center py-5 my-4">
+    <div class="col-lg-6 order-lg-1 order-2">
+      <h1 class="display-4 fw-bold mb-3">Professional Psychotherapy Services</h1>
+      <p class="lead mb-4">Supporting your mental health journey with evidence-based therapies in a compassionate environment.</p>
+      <div class="d-flex gap-3">
+        <button mat-raised-button color="primary" class="cta-button">Get Started</button>
+        <button mat-stroked-button color="primary">Learn More</button>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      1 of 3
+    <div class="col-lg-6 order-lg-2 order-1 mb-4 mb-lg-0">
+      <div class="hero-image rounded-4"></div>
     </div>
-    <div class="col">
-      2 of 3
+  </section>
+
+<!--   About Section -->
+  <section class="about-section row align-items-center py-5 my-4">
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="about-image rounded-4"></div>
     </div>
-    <div class="col">
-      3 of 3
+    <div class="col-lg-6">
+      <h2 class="mb-4">About Dr. Jane Smith</h2>
+      <p class="mb-3">With over 15 years of experience in clinical psychology, Dr. Smith specializes in cognitive behavioral therapy, mindfulness-based approaches, and relationship counseling.</p>
+      <p class="mb-4">She creates a safe, non-judgmental space for clients to explore their thoughts and feelings.</p>
+      <mat-list>
+        <mat-list-item>
+          <mat-icon matListItemIcon>school</mat-icon>
+          <div matListItemTitle>PhD in Clinical Psychology</div>
+          <div matListItemLine>Stanford University</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>verified</mat-icon>
+          <div matListItemTitle>Licensed Psychologist</div>
+          <div matListItemLine>State of California</div>
+        </mat-list-item>
+      </mat-list>
+      <button mat-stroked-button color="primary" class="mt-3">View Full Credentials</button>
     </div>
-  </div>
-</div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section py-5 my-4 bg-light rounded-4">
+    <div class="text-center">
+      <h2 class="mb-4">Ready to Begin Your Healing Journey?</h2>
+      <p class="lead mb-4">Take the first step toward better mental health today.</p>
+      <button mat-raised-button color="primary" class="cta-button">Schedule Your First Session</button>
+    </div>
+  </section>
+</main>

@@ -2,29 +2,24 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 const productSchema = new Schema({
-        name: {
+        title: {
             type: String,
             required: true,
             unique: true
         },
-        link: {
+        icon: {
             type: String,
             required: true,
             unique: true
-        },
-        platform: {
-            type: String,
-            required: true
         },
         description: {
             type: String,
             required: true,
             unique: true
         },
-        isCompleted: {
-            type: Boolean,
-            required: true,
-            default: false
+        duration: {
+            type: String,
+            required: true
         },
     },
     {

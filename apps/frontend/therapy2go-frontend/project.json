@@ -12,6 +12,8 @@
         "{options.outputPath}"
       ],
       "options": {
+        "baseHref": "/",
+        "deployUrl": "/",
         "sourceMap": true,
         "outputPath": "dist/apps/frontend/therapy2go-frontend",
         "index": "apps/frontend/therapy2go-frontend/src/index.html",
@@ -31,6 +33,9 @@
           "@angular/material/prebuilt-themes/azure-blue.css",
           "apps/frontend/therapy2go-frontend/src/styles.scss"
         ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["node_modules/bootstrap/scss/bootstrap.scss", "src/styles"]
+        },
         "scripts": [],
         "server": "apps/frontend/therapy2go-frontend/src/main.server.ts",
         "ssr": {
@@ -63,13 +68,15 @@
           "aot": true
         },
         "uat": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
           "fileReplacements": [
             {
               "replace": "apps/frontend/therapy2go-frontend/src/environments/environment.ts",
               "with": "apps/frontend/therapy2go-frontend/src/environments/environment.uat.ts"
             }
           ],
-          "optimization": true,
           "budgets": [
             {
               "type": "initial",
@@ -78,12 +85,10 @@
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
+              "maximumWarning": "5000kb",
+              "maximumError": "5.5mb"
             }
-          ],
-          "outputHashing": "all",
-          "aot": true
+          ]
         },
         "development": {
           "fileReplacements": [

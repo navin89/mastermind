@@ -1,6 +1,94 @@
-@use '@angular/material' as mat-home;
+@use '@angular/material' as mat;
 
-// Include the styles for therapienow home component
-.container {
 
+$primary: mat.m2-define-palette(mat.$m2-blue-palette);
+
+// Custom variables
+$hero-image-height: 400px;
+$image-radius: 12px;
+
+// Hero section
+.hero-section {
+  .hero-image {
+    height: $hero-image-height;
+    background-image: url('https://images.unsplash.com/photo-1584483766114-2cea6facdf57');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  //@include media-breakpoint-down(lg) {
+  //  .hero-image {
+  //    height: $hero-image-height * 0.8;
+  //  }
+  //}
+
+  //@include media-breakpoint-down(md) {
+  //  .hero-image {
+  //    height: $hero-image-height * 0.6;
+  //  }
+  //}
 }
+
+// Service cards
+.service-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-icon {
+    font-size: 24px;
+  }
+}
+
+// About section
+.about-image {
+  height: 400px;
+  background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+  //@include media-breakpoint-down(lg) {
+  //  height: 350px;
+  //}
+}
+
+// Testimonials
+.quote-icon {
+  font-size: 60px;
+  height: 60px;
+  width: 60px;
+  opacity: 0.2;
+  margin-bottom: -40px;
+  margin-left: -10px;
+}
+
+// CTA buttons
+.cta-button {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+// FAQ accordion
+//.accordion-button {
+//  font-weight: 500;
+//
+//  &:not(.collapsed) {
+//    background-color: rgba(mat.m2-get-color-from-palette($primary), 0.1);
+//    color: mat.m2-get-color-from-palette($primary);
+//  }
+//}
+
+// Utility classes
+//.rounded-4 {
+//  border-radius: $image-radius;
+//}
+//
+//.shadow-sm {
+//  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075) !important;
+//}

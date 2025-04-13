@@ -52,15 +52,21 @@ mat-toolbar {
     display: flex;
     align-items: center;
     transform-style: preserve-3d;
+  }
 
-    @media (min-width: 768px) {
-      display: flex;
+  .desktop-nav {
+    display: flex;
+
+    @media (max-width: 767px) {
+      display: none;
     }
   }
 
   .mobile-menu-button {
-    @media (min-width: 768px) {
-      display: none;
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
     }
   }
 }

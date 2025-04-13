@@ -13,7 +13,7 @@ export class ApiService {
     this.domain = environment.domain;
   }
 
-  getData() {
+  getProductData() {
     return this.http.get(`${this.domain}/api/products`);
   }
 }
