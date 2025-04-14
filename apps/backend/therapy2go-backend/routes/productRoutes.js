@@ -7,7 +7,7 @@ const {products} = require('../utils/therapienow-data')
 
 // get all products
 router.get('/', asyncHandler(async (req, res) => {
-  console.log(products);
+  // console.log(products);
   return res.json(products);
 }))
 

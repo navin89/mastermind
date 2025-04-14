@@ -7,11 +7,9 @@ dotenv.config({path: ".env"});
 const mongoose = require('mongoose');
 const authenticationRoute = require('./routes/userRoutes');
 const productRoute = require('./routes/productRoutes');
+const logRoute = require('./routes/logRoute');
+const {clearLogs, LOG_FILE } = require('./utils/logUtils');
 const fs = require('fs');
-const path = require('path');
-const LOG_DIR = path.join(__dirname, 'logs');
-const LOG_FILE = path.join(LOG_DIR, 'therapienow-uat.log');
-
 const app = express();
 const PORT = process.env.PORT || 8081
 app.use(express.urlencoded({extended: true}));
@@ -37,48 +35,16 @@ app.use((req, res, next)=> {
 
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
+    return res.sendStatus(200);
   }
   next();
 });
 /////-----------------/////
 
+//clear logs
+clearLogs();
 
-// Enable logger route
-// Clear log on server start
-const initLogs = () => {
-  if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR);
-  fs.writeFileSync(LOG_FILE, '');
-};
-
-initLogs();
-
-app.post('/log', (req, res) => {
-  try {
-    const { message, level, timestamp, fileName, lineNumber } = req.body;
-    console.log('Received log request:', req.body);
-
-    if (!message || !level) {
-      return res.status(400).send('Missing required log fields');
-    }
-
-    const logEntry = `[${timestamp || new Date().toISOString()}] [${level}] ${message}` +
-      (fileName ? ` (${fileName}:${lineNumber || '?'})` : '') + '\n';
-
-    fs.appendFile(LOG_FILE, logEntry, (err) => {
-      if (err) {
-        console.error('Log write error:', err);
-        return res.status(500).send('Error saving log');
-      }
-      res.status(200).send({ status: 'logged' });
-    });
-  } catch (err) {
-    console.error('Log processing error:', err);
-    res.status(500).send('Server error');
-  }
-});
 /////-----------------/////
-
 // Enable mongoose connection to MongoDb
 mongoose.connect(process.env.MONGO_URL, {})
     .then((res) => {
@@ -91,15 +57,24 @@ mongoose.connect(process.env.MONGO_URL, {})
 
 app.use(morgan("common"));
 //configure routes
-app.use('/authenticationRoute', authenticationRoute)
-app.use('/api/products', productRoute)
+app.use('/log', logRoute);
+app.use('/authenticationRoute', authenticationRoute);
+app.use('/api/products', productRoute);
+
 //Invalid Route Error Handler
 app.use(notFound);
 //Server Error Middleware Handler
 app.use(serverError)
 
 app.listen(PORT, () => {
-    console.log(`Log server ready on port ${PORT}`);
-    console.log(`Logs will be saved to: ${LOG_FILE}`);
-    console.log(`therapy2go backend-middleware-server successfully started on port ${PORT}`);
+  console.log(`Server started. Log file: ${LOG_FILE}`);
+  // // verify file creation
+  fs.access(LOG_FILE, fs.constants.W_OK, (err) => {
+    if (err) {
+      console.error('Cannot write to log file:', err);
+    } else {
+      console.log('Log file is writable');
+    }
+  });
+  console.log(`therapy2go backend-middleware-server successfully started on port ${PORT}`);
 });
