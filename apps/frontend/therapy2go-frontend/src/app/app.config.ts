@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+// switch back to uat environment for deployment
 import { environment } from '../environments/environment.uat';
 import { DatePipe } from '@angular/common';
 
@@ -38,8 +39,8 @@ export const appConfig: ApplicationConfig = {
       NgbCollapseModule,
       LoggerModule.forRoot({
         serverLoggingUrl: `${environment.domain}/log`,
-        level: environment.isProduction ? NgxLoggerLevel.ERROR : NgxLoggerLevel.DEBUG,
-        serverLogLevel: NgxLoggerLevel.INFO,
+        level: environment.isProduction ? NgxLoggerLevel.INFO : NgxLoggerLevel.DEBUG,
+        serverLogLevel: NgxLoggerLevel.DEBUG,
         httpResponseType: 'json',
         timestampFormat: 'yyyy-MM-dd HH:mm:ss.SSS',
         enableSourceMaps: true
