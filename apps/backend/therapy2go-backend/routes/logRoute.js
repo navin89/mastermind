@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const {info, warn, error, LOG_FILE, validLogNumbers, NGX_LEVELS} = require('../utils/logUtils');
+const {info, error, LOG_FILE, validLogNumbers, NGX_LEVELS} = require('../utils/logUtils');
 const router = express.Router();
 const logLimiter = require('../utils/log-rate-limiter');
 

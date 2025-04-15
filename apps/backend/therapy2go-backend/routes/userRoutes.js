@@ -2,8 +2,7 @@ const express = require('express')
 const User = require('../models/user')
 const router = express.Router()
 const asyncHandler = require('express-async-handler')
-const {jsonWebToken, generateRefreshToken, verifyRefreshToken} = require('../utils/JSONWebToken')
-const { info, error } = require('../utils/logUtils');
+const {jsonWebToken, generateRefreshToken, verifyRefreshToken} = require('../utils/JSONWebToken');
 
 router.post('/register', asyncHandler(async (req, res) => {
 
