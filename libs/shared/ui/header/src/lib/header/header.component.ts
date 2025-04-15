@@ -8,6 +8,7 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { navbarAnimations } from './header.animations';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NGXLogger } from 'ngx-logger';
 
 
 @Component({
@@ -41,13 +42,13 @@ export class HeaderComponent implements OnInit {
   isMobileView = false;
   isMenuOpen = false;
 
-  constructor(private breakPointObserver : BreakpointObserver) {
+  constructor(private breakPointObserver : BreakpointObserver, private logger: NGXLogger) {
     // EMPTY
   }
 
   ngOnInit() {
     this.checkViewport();
-    console.log('The header component is initialized');
+    this.logger.info('The header component is initialized');
   }
 
   @HostListener('window:resize', ['$event'])

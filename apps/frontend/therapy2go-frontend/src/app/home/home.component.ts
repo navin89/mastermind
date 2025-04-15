@@ -34,9 +34,10 @@ export class HomeComponent implements OnInit {
   testimonials = [];
 
   constructor(private apiService: ApiService, private logger: NGXLogger ) {
-    this.apiService.getProductData().subscribe((objResult) => {
-      console.log(JSON.stringify(objResult));
-    });
+    this.apiService.getProductData()
+      .subscribe((result) => {
+          this.logger.info(`products received successfully with payload:: ${JSON.stringify(result)}`);
+      });
   }
 
   ngOnInit(): void {
