@@ -2,7 +2,7 @@ const express = require('express')
 const User = require('../models/user')
 const router = express.Router()
 const asyncHandler = require('express-async-handler')
-const {jsonWebToken, generateRefreshToken, verifyRefreshToken} = require('../utils/JSONWebToken')
+const {jsonWebToken, generateRefreshToken, verifyRefreshToken} = require('../utils/JSONWebToken');
 
 router.post('/register', asyncHandler(async (req, res) => {
 
@@ -11,7 +11,8 @@ router.post('/register', asyncHandler(async (req, res) => {
 
     if (userExists) {
         res.status(400)
-        throw new Error('User Already Exists')
+        error(`user already exists with email: ${email} and password: ${password}`);
+        throw new Error('user already exists');
     }
     const user = await User.create({
         email,
@@ -26,7 +27,8 @@ router.post('/register', asyncHandler(async (req, res) => {
         })
     } else {
         res.status(400)
-        throw new Error('Invalid User Data')
+        error(`invalid user with email: ${email} and password: ${password} for registration`);
+        throw new Error('invalid user with email and password for registration');
     }
 }));
 
@@ -43,7 +45,8 @@ router.post('/login', asyncHandler(async (req, res) => {
         })
     } else {
         res.status(401)
-        throw new Error('Invalid Email or Password')
+        error(`invalid user with email: ${email} and password: ${password} for login`);
+        throw new Error('invalid email or password for login')
     }
 }));
 

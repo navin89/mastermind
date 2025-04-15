@@ -45,5 +45,6 @@ faqs = [
 
 module.exports = {
   products: products,
-  testimonials: testimonials
+  testimonials: testimonials,
+  faqs: faqs,
 }
