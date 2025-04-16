@@ -38,11 +38,12 @@ app.use((req, res, next)=> {
   next();
 });
 /////-----------------/////
+// Trust 2 proxies (Cloudflare + DigitalOcean)
+app.set('trust proxy', 2);
 
-
-if (process.env.NODE_ENV === 'development') {
-  app.set('trust proxy', 'loopback');
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.set('trust proxy', 'loopback');
+// }
 
 app.get('/test-ip', (req, res) => {
   console.log('X-Forwarded-For:', req.headers['x-forwarded-for']);
