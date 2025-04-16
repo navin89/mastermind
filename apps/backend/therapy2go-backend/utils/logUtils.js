@@ -66,7 +66,7 @@ const flushBuffer = async () => {
     // Upload to Spaces
     await s3.upload({
       Bucket: 'logs-bucket-mastermind',
-      Key: `logs/therapienow-uat-${dateStamp}.log`,
+      Key: `../logs/therapienow-uat-${dateStamp}.log`,
       Body: logBuffer.join('\n'),
       ACL: 'public-read'
     }, (err, data) => {
@@ -100,7 +100,7 @@ const log = (level, message, origin= 'backend') => {
 };
 
 // Periodic flush
-setInterval(flushBuffer, 30_000);
+setInterval(flushBuffer, 60_000);
 
 
 module.exports =

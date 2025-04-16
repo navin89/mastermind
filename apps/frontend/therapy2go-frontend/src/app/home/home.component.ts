@@ -40,8 +40,8 @@ export class HomeComponent implements OnInit {
       });
 
     this.apiService.getTestIp()
-      .subscribe((result) => {
-        this.logger.info(`test ips received:: ${JSON.stringify(result)}`);
+      .subscribe(() => {
+        this.logger.info(`test ips received`);
       })
   }
 
