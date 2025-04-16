@@ -49,8 +49,7 @@ const getCallerInfo = () => {
 
 const clearLogs = () => {
   if (!fs.existsSync(LOG_DIR)) {
-    fs.mkdirSync(LOG_DIR, { recursive: true });
-    fs.chmodSync(LOG_DIR, 0o777); // Read/write for all
+    fs.mkdirSync(LOG_DIR, { recursive: true, mode: 0o777 }); // Full permissions
   }
   fs.writeFileSync(LOG_FILE, '');
   fs.chmodSync(LOG_FILE, 0o666); // Read/write for all
