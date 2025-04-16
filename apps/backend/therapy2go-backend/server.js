@@ -37,7 +37,7 @@ app.use((req, res, next)=> {
   }
   next();
 });
-
+/////-----------------/////
 
 if (process.env.NODE_ENV === 'development') {
   app.set('trust proxy', 'loopback');
@@ -63,12 +63,12 @@ clearLogs();
 /////-----------------/////
 // document database connected
 mongoose.connect(process.env.MONGO_URL, {})
-    .then((res) => {
-        info(`MongoDB connected (readyState: ${res.connection.readyState})`);
-    })
-    .catch((error) => {
-        error(`MongoDB connection error: ${error}`);
-    });
+  .then((res) => {
+    info(`MongoDB connected (readyState: ${res.connection.readyState})`);
+  })
+  .catch((error) => {
+    error(`MongoDB connection error: ${error}`);
+  });
 /////-----------------/////
 
 app.use(morgan("common"));
