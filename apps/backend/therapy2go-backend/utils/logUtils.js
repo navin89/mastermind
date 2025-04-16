@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const LOG_DIR = path.join(__dirname, '../logs');
 const LOG_FILE = path.join(LOG_DIR, 'therapienow-uat.log');
+const AWS = require('aws-sdk');
 const NGX_LEVELS = {
   0: 'TRACE',
   1: 'DEBUG',
@@ -14,6 +15,13 @@ const NGX_LEVELS = {
 
 const validLogNumbers = [0, 1, 2, 3, 4, 5, 6];
 const validLogStrings = Object.values(NGX_LEVELS);
+
+// AWS
+const s3 = new AWS.S3({
+  endpoint: 'https://logs-bucket-mastermind.fra1.digitaloceanspaces.com',
+  accessKeyId: process.env.SPACES_KEY,
+  secretAccessKey: process.env.SPACES_SECRET
+});
 
 // Improved stack trace parser for backend calls
 const getCallerInfo = () => {
@@ -56,6 +64,16 @@ const log = (level, message, origin= 'backend') => {
   fs.appendFile(LOG_FILE, entry, (err) => {
     if (err) console.error(`Failed to write log: ${err.message}`);
   });
+
+  // Upload to Spaces
+  s3.upload({
+    Bucket: 'logs-bucket-mastermind',
+    Key: `logs/therapienow-${new Date().toISOString()}.log`,
+    Body: entry
+  }).promise()
+    .then(result => {
+      console.log(result)
+    });
 };
 
 
