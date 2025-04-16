@@ -100,7 +100,7 @@ const log = (level, message, origin= 'backend') => {
 };
 
 // Periodic flush
-setInterval(flushBuffer, 30_000);
+setInterval(flushBuffer, 60_000);
 
 
 module.exports =
