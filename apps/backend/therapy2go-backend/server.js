@@ -15,8 +15,6 @@ const PORT = process.env.PORT || 8081
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-/////-----------------/////
-
 // Enable CORS for a specific origin
 const allowedOrigins = [
   'http://localhost:4200',
@@ -41,32 +39,36 @@ app.use((req, res, next)=> {
 });
 /////-----------------/////
 
-// trust the one reverse proxy
-// app.set('trust proxy', 2);
-// app.get('/log-ip', (req, res) => {
-//   console.log('Client IP:', req.ip);
-//   res.send('check server logs for the IP.');
-// });
+
+if (process.env.NODE_ENV === 'development') {
+  app.set('trust proxy', 'loopback');
+}
 
 app.get('/test-ip', (req, res) => {
   console.log('X-Forwarded-For:', req.headers['x-forwarded-for']);
   console.log('req.ip:', req.ip);
-  res.send('check server logs for IP details.');
+
+
+  // Send JSON response
+  res.json({
+    message: 'Check server logs for IP details.',
+    clientIp: req.ip,
+    xForwardedFor: req.headers['x-forwarded-for'] || 'Not present'
+  });
 });
 
-/////-----------------/////
 //clear logs
 clearLogs();
 
 /////-----------------/////
 // document database connected
 mongoose.connect(process.env.MONGO_URL, {})
-    .then((res) => {
-        info(`MongoDB connected (readyState: ${res.connection.readyState})`);
-    })
-    .catch((error) => {
-        error(`MongoDB connection error: ${error}`);
-    });
+  .then((res) => {
+    info(`MongoDB connected (readyState: ${res.connection.readyState})`);
+  })
+  .catch((error) => {
+    error(`MongoDB connection error: ${error}`);
+  });
 /////-----------------/////
 
 app.use(morgan("common"));
