@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const authenticationRoute = require('./routes/userRoutes');
 const productRoute = require('./routes/productRoutes');
 const logRoute = require('./routes/logRoute');
-const {clearLogs, LOG_FILE } = require('./utils/logUtils');
+const {info, warn, error, clearLogs, LOG_FILE } = require('./utils/logUtils');
 const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 8081
@@ -41,17 +41,31 @@ app.use((req, res, next)=> {
 });
 /////-----------------/////
 
+// trust the one reverse proxy
+// app.set('trust proxy', 2);
+// app.get('/log-ip', (req, res) => {
+//   console.log('Client IP:', req.ip);
+//   res.send('check server logs for the IP.');
+// });
+
+app.get('/test-ip', (req, res) => {
+  console.log('X-Forwarded-For:', req.headers['x-forwarded-for']);
+  console.log('req.ip:', req.ip);
+  res.send('check server logs for IP details.');
+});
+
+/////-----------------/////
 //clear logs
 clearLogs();
 
 /////-----------------/////
-// Enable mongoose connection to MongoDb
+// document database connected
 mongoose.connect(process.env.MONGO_URL, {})
     .then((res) => {
-        console.log("mongo db connected with ready-state value::", res.connection.readyState);
+        info(`MongoDB connected (readyState: ${res.connection.readyState})`);
     })
     .catch((error) => {
-        console.log(error);
+        error(`MongoDB connection error: ${error}`);
     });
 /////-----------------/////
 
@@ -67,14 +81,22 @@ app.use(notFound);
 app.use(serverError)
 
 app.listen(PORT, () => {
-  console.log(`Server started. Log file: ${LOG_FILE}`);
+  info(`Server started. Log file: ${LOG_FILE}`);
   // // verify file creation
   fs.access(LOG_FILE, fs.constants.W_OK, (err) => {
     if (err) {
-      console.error('Cannot write to log file:', err);
+      error('Cannot write to log file:', err);
     } else {
-      console.log('Log file is writable');
+      info('Log file is writable');
     }
   });
-  console.log(`therapy2go backend-middleware-server successfully started on port ${PORT}`);
+  info(`therapy2go backend-middleware-server successfully started on port ${PORT}`);
+});
+
+process.on('uncaughtException', (err) => {
+  error(`Uncaught Exception: ${err.message}`);
+});
+
+process.on('unhandledRejection', (reason) => {
+  warn(`Unhandled Rejection: ${reason}`);
 });

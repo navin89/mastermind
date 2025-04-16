@@ -1,45 +1,47 @@
 const express = require('express');
 const fs = require('fs');
-const {LOG_FILE, validLogNumbers, NGX_LEVELS} = require('../utils/logUtils');
+const {info, error, LOG_FILE, validLogNumbers, NGX_LEVELS} = require('../utils/logUtils');
 const router = express.Router();
 const logLimiter = require('../utils/log-rate-limiter');
 
 router.post('/', logLimiter,(req, res) => {
   try {
-    console.log(`logs will be saved to: ${LOG_FILE}`);
     const { message, level, timestamp, fileName, lineNumber } = req.body;
-    console.log('Received log request:', req.body);
+    info('received log requests from client:', req.body);
+    info(`logs will be saved to: ${LOG_FILE}`);
 
-    // Validate numeric or string level
+    // -------------------------------
+    // Enhanced Validation Section
+    // -------------------------------
+    if (typeof message !== 'string' || message.trim().length === 0) {
+      return res.status(400).send('Invalid message format');
+    }
+
     const levelNum = Number(level);
-    if (isNaN(levelNum)) {
-      return res.status(400).send('Invalid log level type');
+    if (isNaN(levelNum) || !validLogNumbers.includes(levelNum)) {
+      return res.status(400).send('Invalid log level');
     }
 
-    if (!validLogNumbers.includes(levelNum)) {
-      return res.status(400).send('Invalid log level value');
+    if (typeof fileName !== 'undefined' && typeof fileName !== 'string') {
+      return res.status(400).send('Invalid file name format');
     }
+    // -------------------------------
 
     // Convert to standardized string
     const levelString = NGX_LEVELS[levelNum];
-
-    if (!message || !level) {
-      return res.status(400).send('Missing required log fields');
-    }
-
-    // process log
-    const logEntry = `[${timestamp || new Date().toISOString()}] [${levelString}] ${message}` +
+    // append log
+    const logEntry = `[${timestamp || new Date().toISOString()}] [frontend] [${levelString}] ${message}` +
       (fileName ? ` (${fileName}:${lineNumber || '?'})` : '') + '\n';
 
     fs.appendFile(LOG_FILE, logEntry, (err) => {
       if (err) {
-        console.error('Log write error:', err);
+        error('Log write error:', err);
         return res.status(500).send('Error saving log');
       }
       res.status(200).send({ status: 'logged' });
     });
   } catch (err) {
-    console.error('Log processing error:', err);
+    error('Log processing error:', err);
     res.status(500).send('Server error');
   }
 });
