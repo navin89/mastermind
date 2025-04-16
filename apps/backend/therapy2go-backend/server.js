@@ -39,6 +39,7 @@ app.use((req, res, next)=> {
 });
 /////-----------------/////
 
+
 if (process.env.NODE_ENV === 'development') {
   app.set('trust proxy', 'loopback');
 }
@@ -47,6 +48,7 @@ app.get('/test-ip', (req, res) => {
   console.log('X-Forwarded-For:', req.headers['x-forwarded-for']);
   console.log('req.ip:', req.ip);
 
+
   // Send JSON response
   res.json({
     message: 'Check server logs for IP details.',
@@ -54,8 +56,6 @@ app.get('/test-ip', (req, res) => {
     xForwardedFor: req.headers['x-forwarded-for'] || 'Not present'
   });
 });
-
-/////-----------------/////
 
 //clear logs
 clearLogs();
