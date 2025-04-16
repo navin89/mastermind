@@ -37,14 +37,6 @@ app.use((req, res, next)=> {
   }
   next();
 });
-/////-----------------/////
-
-// trust the one reverse proxy
-// app.set('trust proxy', 2);
-// app.get('/log-ip', (req, res) => {
-//   console.log('Client IP:', req.ip);
-//   res.send('check server logs for the IP.');
-// });
 
 
 if (process.env.NODE_ENV === 'development') {
