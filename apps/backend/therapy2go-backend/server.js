@@ -41,6 +41,20 @@ app.use((req, res, next)=> {
 });
 /////-----------------/////
 
+// trust the one reverse proxy
+// app.set('trust proxy', 2);
+// app.get('/log-ip', (req, res) => {
+//   console.log('Client IP:', req.ip);
+//   res.send('check server logs for the IP.');
+// });
+
+app.get('/test-ip', (req, res) => {
+  console.log('X-Forwarded-For:', req.headers['x-forwarded-for']);
+  console.log('req.ip:', req.ip);
+  res.send('check server logs for IP details.');
+});
+
+/////-----------------/////
 //clear logs
 clearLogs();
 
