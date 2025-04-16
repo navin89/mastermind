@@ -16,4 +16,8 @@ export class ApiService {
   getProductData() {
     return this.http.get(`${this.domain}/api/products`);
   }
+
+  getTestIp() {
+    return this.http.get(`${this.domain}/test-ip`);
+  }
 }
