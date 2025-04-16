@@ -18,10 +18,11 @@ const validLogStrings = Object.values(NGX_LEVELS);
 
 // AWS
 const s3 = new AWS.S3({
-  endpoint: 'https://logs-bucket-mastermind.fra1.digitaloceanspaces.com',
+  endpoint: 'https://fra1.digitaloceanspaces.com',
   accessKeyId: process.env.SPACES_KEY,
   secretAccessKey: process.env.SPACES_SECRET,
-  region: 'fra1'
+  region: 'fra1',
+  signatureVersion: 'v4'
 });
 
 // Improved stack trace parser for backend calls
@@ -67,11 +68,17 @@ const flushBuffer = async () => {
       Bucket: 'logs-bucket-mastermind',
       Key: `logs/therapienow-uat-${dateStamp}.log`,
       Body: logBuffer.join('\n'),
-      ACL: 'private'
+      ACL: 'public-read'
+    }, (err, data) => {
+      if (err) {
+        console.error('❌ Spaces Upload Error:', err);
+      } else {
+        console.log('✅ Upload Success:', data.Location);
+      }
     }).promise();
     logBuffer = [];
   } catch (err) {
-    console.error('space upload failed:', err);
+    console.error('space upload function failed:', err);
   }
 };
 
