@@ -54,27 +54,45 @@ const clearLogs = () => {
   fs.chmodSync(LOG_FILE, 0o666); // Read/write for all
 };
 
+// Buffered upload to avoid spamming API
+let logBuffer = [];
+const flushBuffer = async () => {
+  if (logBuffer.length === 0) return;
+
+  const dateStamp = new Date().toISOString().split('T')[0];
+  try {
+    // Upload to Spaces
+    await s3.upload({
+      Bucket: 'logs-bucket-mastermind',
+      Key: `logs/therapienow-uat-${dateStamp}.log`,
+      Body: logBuffer.join('\n'),
+      ACL: 'private'
+    }).promise();
+    logBuffer = [];
+  } catch (err) {
+    console.error('space upload failed:', err);
+  }
+};
+
 const log = (level, message, origin= 'backend') => {
   const timestamp = new Date().toISOString();
   const caller = getCallerInfo();
 
-  const entry = `[${timestamp}] [${origin}] [${level}] ${message} ` +
-    `(${caller.file}:${caller.line})\n`;
+  const entry = `[${timestamp}] [${origin}] [${level}] ${message} (${caller.file}:${caller.line})`;
+  logBuffer.push(entry);
 
   fs.appendFile(LOG_FILE, entry, (err) => {
     if (err) console.error(`Failed to write log: ${err.message}`);
   });
 
-  // Upload to Spaces
-  s3.upload({
-    Bucket: 'logs-bucket-mastermind',
-    Key: `logs/therapienow-${new Date().toISOString()}.log`,
-    Body: entry
-  }).promise()
-    .then(result => {
-      console.log(result)
-    });
+  // Flush every 10 entries or 30 seconds
+  if (logBuffer.length >= 10) {
+    flushBuffer().then(() => console.log('flushing of logs done'));
+  }
 };
+
+// Periodic flush
+setInterval(flushBuffer, 30_000);
 
 
 module.exports =
