@@ -18,6 +18,6 @@ export class ApiService {
   }
 
   getTestIp() {
-    return this.http.get('http://localhost:8081/test-ip');
+    return this.http.get(`${this.domain}/test-ip`);
   }
 }
