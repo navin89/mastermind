@@ -20,7 +20,8 @@ const validLogStrings = Object.values(NGX_LEVELS);
 const s3 = new AWS.S3({
   endpoint: 'https://logs-bucket-mastermind.fra1.digitaloceanspaces.com',
   accessKeyId: process.env.SPACES_KEY,
-  secretAccessKey: process.env.SPACES_SECRET
+  secretAccessKey: process.env.SPACES_SECRET,
+  region: 'fra1'
 });
 
 // Improved stack trace parser for backend calls
