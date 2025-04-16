@@ -38,6 +38,11 @@ export class HomeComponent implements OnInit {
       .subscribe((result) => {
           this.logger.info(`products received successfully with payload:: ${JSON.stringify(result)}`);
       });
+
+    this.apiService.getTestIp()
+      .subscribe((result) => {
+        this.logger.info(`test ips received:: ${JSON.stringify(result)}`);
+      })
   }
 
   ngOnInit(): void {
