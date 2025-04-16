@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.logger.info('Home component loaded');
+    this.logger.debug('Debug data'); // Only appears locally (not sent to server)
   }
 }
 
