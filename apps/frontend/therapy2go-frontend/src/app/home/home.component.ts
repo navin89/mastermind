@@ -40,14 +40,13 @@ export class HomeComponent implements OnInit {
       });
 
     this.apiService.getTestIp()
-      .subscribe(() => {
-        this.logger.info(`test ips received`);
+      .subscribe((result) => {
+        this.logger.info(`x-forwarded-for ip details received:: ${JSON.stringify(result)}`);
       })
   }
 
   ngOnInit(): void {
-    this.logger.info('Home component loaded');
-    this.logger.debug('Debug data'); // Only appears locally (not sent to server)
+    this.logger.info('home component loaded');
   }
 }
 
