@@ -32,12 +32,11 @@ router.post('/', logLimiter,(req, res) => {
     // append log
     const logEntry = `[${timestamp || new Date().toISOString()}] [frontend] [${levelString}] ${message}` +
       (fileName ? ` (${fileName}:${lineNumber || '?'})` : '') + '\n';
-    console.log('Raw log entry:', logEntry);
+    info('Raw log entry:', logEntry);
 
     fs.appendFile(LOG_FILE, logEntry, (err) => {
       if (err) {
         error('Log write error:', err);
-        console.error('FS Write Error Details:', err.stack);
         return res.status(500).send('Error saving log');
       }
       res.status(200).send({ status: 'logged' });
