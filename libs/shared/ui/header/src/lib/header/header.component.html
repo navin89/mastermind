@@ -14,8 +14,10 @@
 
 
     <nav class="desktop-nav">
-      <a mat-button routerLink="/services" routerLinkActive="active">Services We Provide</a>
-      <a mat-button routerLink="/appointment-consultation" routerLinkActive="active">Contact Us</a>
+      <div class="container-fluid">
+        <a mat-button routerLink="/services" routerLinkActive="active">Services We Provide</a>
+        <a mat-button routerLink="/therapienow-form" routerLinkActive="active">Contact Us</a>
+      </div>
     </nav>
   </div>
 
@@ -29,6 +31,6 @@
 
   <mat-menu #mobileMenu="matMenu" (closed)="rotateState = 'default'">
     <button mat-menu-item routerLink="/services" routerLinkActive="active" (click)="closeMenu()">Services We Provide</button>
-    <button mat-menu-item routerLink="/appointment-consultation" routerLinkActive="active" (click)="closeMenu()">Contact Us</button>
+    <button mat-menu-item routerLink="/therapienow-form" routerLinkActive="active" (click)="closeMenu()">Contact Us</button>
   </mat-menu>
 </mat-toolbar>
