@@ -65,14 +65,14 @@ const flushBuffer = async () => {
     // Upload to Spaces
     await s3.upload({
       Bucket: 'logs-bucket-mastermind',
-      Key: `../logs/therapienow-uat-${dateStamp}.log`,
-      Body: logBuffer.join('\n'),
+      Key: `therapienow/therapienow-uat-${dateStamp}.log`,
+      Body: logBuffer.join(''),
       ACL: 'public-read'
     }, (err, data) => {
       if (err) {
-        console.error('❌ Spaces Upload Error:', err);
+        console.error('❌ spaces upload error:', err);
       } else {
-        console.log('✅ Upload Success:', data.Location);
+        console.log('✅ upload success:', data.Location);
       }
     }).promise();
     logBuffer = [];
@@ -85,7 +85,7 @@ const log = (level, message, origin= 'backend') => {
   const timestamp = new Date().toISOString();
   const caller = getCallerInfo();
 
-  const entry = `[${timestamp}] [${origin}] [${level}] ${message} (${caller.file}:${caller.line})`;
+  const entry = `[${timestamp}] [${origin}] [${level}] ${message} (${caller.file}:${caller.line})\n`;
   logBuffer.push(entry);
 
   fs.appendFile(LOG_FILE, entry, (err) => {
