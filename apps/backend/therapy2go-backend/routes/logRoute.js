@@ -7,7 +7,7 @@ const logLimiter = require('../utils/log-rate-limiter');
 router.post('/', logLimiter,(req, res) => {
   try {
     const { message, level, timestamp, fileName, lineNumber } = req.body;
-    info('received log requests from client:', req.body);
+    info(`received log requests from client: ${req.body}`);
     info(`logs will be saved to: ${LOG_FILE}`);
 
     // -------------------------------
@@ -29,10 +29,11 @@ router.post('/', logLimiter,(req, res) => {
 
     // Convert to standardized string
     const levelString = NGX_LEVELS[levelNum];
+    info(`level string is ${levelString}`);
     // append log
     const logEntry = `[${timestamp || new Date().toISOString()}] [frontend] [${levelString}] ${message}` +
       (fileName ? ` (${fileName}:${lineNumber || '?'})` : '') + '\n';
-    info('Raw log entry:', logEntry);
+    info(`Raw log entry: ${logEntry}`);
 
     fs.appendFile(LOG_FILE, logEntry, (err) => {
       if (err) {
