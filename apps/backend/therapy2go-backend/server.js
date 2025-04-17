@@ -46,8 +46,8 @@ app.set('trust proxy', 2);
 // }
 
 app.get('/test-ip', (req, res) => {
-  console.log('X-Forwarded-For:', req.headers['x-forwarded-for']);
-  console.log('req.ip:', req.ip);
+  info('X-Forwarded-For:', req.headers['x-forwarded-for']);
+  info('req.ip:', req.ip);
 
 
   // Send JSON response

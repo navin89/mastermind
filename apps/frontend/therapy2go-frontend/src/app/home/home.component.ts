@@ -41,12 +41,12 @@ export class HomeComponent implements OnInit {
 
     this.apiService.getTestIp()
       .subscribe((result) => {
-        this.logger.info(`test ips received:: ${JSON.stringify(result)}`);
+        this.logger.info(`x-forwarded-for ip details received:: ${JSON.stringify(result)}`);
       })
   }
 
   ngOnInit(): void {
-    this.logger.info('Home component loaded');
+    this.logger.info('home component loaded');
   }
 }
 
