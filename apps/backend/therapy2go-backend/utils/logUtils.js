@@ -74,12 +74,12 @@ const flushBuffer = async () => {
     const currentBuffer = [...logBuffer];
     logBuffer = [];
 
-    // Append to local file immediately
-    fs.appendFileSync(LOG_FILE, currentBuffer.join(''));
-
     // Upload with proper promise handling
     const data = await s3.upload(uploadParams).promise();
     console.log('✅ Upload success:', data.Location);
+
+    // Append to local file
+    fs.appendFileSync(LOG_FILE, currentBuffer.join(''));
 
   } catch (err) {
     console.error('❌ Upload failed:', err);
