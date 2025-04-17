@@ -18,7 +18,7 @@ app.use(express.json());
 // Enable CORS for a specific origin
 const allowedOrigins = [
   'http://localhost:4200',
-  'https://therapienow.com'
+  'https://uat.therapienow.com'
 ];
 
 // Set up CORS
