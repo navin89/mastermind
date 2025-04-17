@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const LOG_DIR = path.join(__dirname, '../logs');
+const LOG_DIR = path.join(process.cwd(), 'logs');
 const LOG_FILE = path.join(LOG_DIR, 'therapienow-uat.log');
 const AWS = require('aws-sdk');
 const NGX_LEVELS = {
@@ -22,7 +22,7 @@ const s3 = new AWS.S3({
   accessKeyId: process.env.SPACES_KEY,
   secretAccessKey: process.env.SPACES_SECRET,
   region: 'fra1',
-  signatureVersion: 'v4'
+  signatureVersion: 'v2'
 });
 
 // Improved stack trace parser for backend calls
