@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@mastermind/header": ["libs/shared/ui/header/src/index.ts"],
-      "@mastermind/products": ["libs/products/src/index.ts"]
+      "@mastermind/products": ["libs/products/src/index.ts"],
+      "@mastermind/therapienow-form": ["libs/therapienow-form/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

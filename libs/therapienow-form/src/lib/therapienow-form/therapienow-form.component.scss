@@ -1,0 +1,58 @@
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+  form {
+    padding: 15px;
+  }
+}
+
+.basic-field {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.address-field {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.phone-field {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.add-button {
+  width: 46px;
+  padding: 5px;
+}
+.control-buttons {
+  margin-bottom: var(--spacing-step);
+  display: flex;
+  justify-content: left;
+}
+.control-container {
+  display: flex;
+  align-items: center;
+}
+.remove-button {
+  width: 50px;
+  min-width: 45px;
+  margin: 0 0 0 10px;
+  background-color: transparent;
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+.phone-label-dropdown {
+  margin-right: var(--spacing-step);
+  width: 110px;
+}
