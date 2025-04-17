@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   constructor(private apiService: ApiService, private logger: NGXLogger ) {
     this.apiService.getProductData()
       .subscribe((result) => {
-          this.logger.info(`products received successfully with payload:: ${JSON.stringify(result)}`);
+          this.logger.info(`products received successfully with payload:: ${JSON.stringify(result)}`)
       });
 
     this.apiService.getTestIp()

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const LOG_DIR = path.join(__dirname, '../logs');
+const LOG_DIR = path.join(process.cwd(), 'logs');
 const LOG_FILE = path.join(LOG_DIR, 'therapienow-uat.log');
 const AWS = require('aws-sdk');
 const NGX_LEVELS = {
@@ -22,7 +22,7 @@ const s3 = new AWS.S3({
   accessKeyId: process.env.SPACES_KEY,
   secretAccessKey: process.env.SPACES_SECRET,
   region: 'fra1',
-  signatureVersion: 'v4'
+  signatureVersion: 'v2'
 });
 
 // Improved stack trace parser for backend calls
@@ -61,23 +61,33 @@ const flushBuffer = async () => {
   if (logBuffer.length === 0) return;
 
   const dateStamp = new Date().toISOString().split('T')[0];
+  const uploadParams = {
+    Bucket: 'logs-bucket-mastermind',
+    Key: `therapienow-uat-${dateStamp}.log`,
+    Body: logBuffer.join(''),
+    ACL: 'public-read',
+    ContentType: 'text/plain'
+  };
+
   try {
-    // Upload to Spaces
-    await s3.upload({
-      Bucket: 'logs-bucket-mastermind',
-      Key: `therapienow/therapienow-uat-${dateStamp}.log`,
-      Body: logBuffer.join(''),
-      ACL: 'public-read'
-    }, (err, data) => {
-      if (err) {
-        console.error('❌ spaces upload error:', err);
-      } else {
-        console.log('✅ upload success:', data.Location);
-      }
-    }).promise();
+    // Store current buffer and clear immediately
+    const currentBuffer = [...logBuffer];
     logBuffer = [];
+
+    // Upload with proper promise handling
+    const data = await s3.upload(uploadParams).promise();
+    console.log('✅ Upload success:', data.Location);
+
+    // Append to local file after successful upload
+    fs.appendFileSync(LOG_FILE, currentBuffer.join(''));
+
   } catch (err) {
-    console.error('space upload function failed:', err);
+    console.error('❌ Upload failed:', err);
+    // Restore buffer if upload fails
+    logBuffer.unshift(...currentBuffer);
+
+    // Retry after 30 seconds
+    setTimeout(flushBuffer, 30000);
   }
 };
 
@@ -99,7 +109,7 @@ const log = (level, message, origin= 'backend') => {
 };
 
 // Periodic flush
-setInterval(flushBuffer, 60_000);
+setInterval(flushBuffer, 30_000);
 
 
 module.exports =

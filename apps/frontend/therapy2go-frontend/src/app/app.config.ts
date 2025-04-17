@@ -39,11 +39,12 @@ export const appConfig: ApplicationConfig = {
       NgbCollapseModule,
       LoggerModule.forRoot({
         serverLoggingUrl: `${environment.domain}/log`,
-        level: NgxLoggerLevel.ERROR ,
+        level: NgxLoggerLevel.INFO,
         serverLogLevel: NgxLoggerLevel.INFO,
         httpResponseType: 'json',
         timestampFormat: 'yyyy-MM-dd HH:mm:ss.SSS',
-        enableSourceMaps: true
+        enableSourceMaps: true,
+        withCredentials: true
       })
     )
   ],
