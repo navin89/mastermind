@@ -103,9 +103,9 @@ const log = (level, message, origin= 'backend') => {
   });
 
   // Flush every 10 entries or 30 seconds
-  if (logBuffer.length >= 10) {
-    flushBuffer().then(() => console.log('flushing of logs done'));
-  }
+  // if (logBuffer.length >= 10) {
+  //   flushBuffer().then(() => console.log('flushing of logs done'));
+  // }
 };
 
 // Periodic flush
