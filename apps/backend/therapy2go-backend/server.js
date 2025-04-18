@@ -17,8 +17,8 @@ app.use(express.json());
 
 // Enable CORS for a specific origin
 const allowedOrigins = [
-  'http://localhost:4200',
-  'https://uat.therapienow.com'
+  process.env.DEV_DOMAIN,
+  process.env.UAT_DOMAIN
 ];
 
 // Set up CORS
