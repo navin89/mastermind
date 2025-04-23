@@ -18,7 +18,8 @@ app.use(express.json());
 // Enable CORS for a specific origin
 const allowedOrigins = [
   process.env.DEV_DOMAIN,
-  process.env.UAT_DOMAIN
+  process.env.UAT_DOMAIN,
+  process.env.SERVER_SIDE_DOMAIN
 ];
 
 // Set up CORS
