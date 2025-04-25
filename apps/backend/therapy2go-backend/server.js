@@ -4,7 +4,6 @@ const notFound = require('./middleware/notFound');
 const serverError = require('./middleware/serverError');
 const dotenv = require('dotenv');
 dotenv.config({path: ".env"});
-const mongoose = require('mongoose');
 const authenticationRoute = require('./routes/userRoutes');
 const productRoute = require('./routes/productRoutes');
 const logRoute = require('./routes/logRoute');
@@ -64,15 +63,20 @@ clearLogs();
 
 /////-----------------/////
 // document database connected
-mongoose.connect(process.env.MONGO_URL, {})
-  .then((res) => {
-    info(`MongoDB connected (readyState: ${res.connection.readyState})`);
-  })
-  .catch((error) => {
-    error(`MongoDB connection error: ${error}`);
-  });
+// mongoose.connect(process.env.MONGO_URL, {})
+//   .then((res) => {
+//     info(`MongoDB connected (readyState: ${res.connection.readyState})`);
+//   })
+//   .catch((error) => {
+//     error(`MongoDB connection error: ${error}`);
+//   });
 /////-----------------/////
 
+/////-----------------/////
+// relational database connected
+// dbQueries.createUsersTable()
+//   .then(result => info(`PostgreSQL connected:: ${result}`));
+/////-----------------/////
 app.use(morgan("common"));
 //configure routes
 app.use('/log', logRoute);
