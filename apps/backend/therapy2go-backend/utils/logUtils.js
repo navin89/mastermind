@@ -15,6 +15,7 @@ const NGX_LEVELS = {
 
 const validLogNumbers = [0, 1, 2, 3, 4, 5, 6];
 const validLogStrings = Object.values(NGX_LEVELS);
+const env = process.env.NODE_ENV || 'dev';
 
 // AWS
 const s3 = new AWS.S3({
@@ -74,9 +75,11 @@ const flushBuffer = async () => {
     const currentBuffer = [...logBuffer];
     logBuffer = [];
 
-    // Upload with proper promise handling
-    const data = await s3.upload(uploadParams).promise();
-    console.log('✅ Upload success:', data.Location);
+    // Upload with proper promise handling if only UAT env
+    if(env !== 'dev') {
+      const data = await s3.upload(uploadParams).promise();
+      console.log('✅ Upload success:', data.Location);
+    }
 
     // Append to local file
     fs.appendFileSync(LOG_FILE, currentBuffer.join(''));
