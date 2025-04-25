@@ -1,4 +1,4 @@
-<form [formGroup]="form"  class="container mt-4">
+<form [formGroup]="form"  class="form" (ngSubmit)="onSubmit($event)">
   <fieldset class="basic-field mb-1">
     <div class="form-field mb-1">
       <label for="name" class="form-label">First Name</label>
@@ -24,7 +24,7 @@
       <input formControlName="city" class="form-control" type="text" id="city" placeholder="City">
     </div>
     <div class="form-field">
-      <label for="post-code">Post Code</label>
+      <label for="post-code">PostCode</label>
       <input formControlName="postcode" class="form-control" type="number" id="post-code" placeholder="Post code">
     </div>
   </fieldset>
@@ -33,10 +33,13 @@
     <div class="control-buttons">
       <button class="add-button" (click)="addPhone()" type="button">+</button>
     </div>
-    <div class="form-field" *ngFor="let phone of form.controls.phones.controls; index as i">
-      <label for="phone{{i}}">Phone number</label>
+    <div class="form-field" *ngFor="let phone of form.controls.phones.controls; index as i" [formGroupName]="i">
+      <label for="phone-{{i}}">Phone number</label>
       <div class="control-container">
-        <input [formControlName]="i" type="text" placeholder="Enter phone number" id="phone{{i}}">
+        <select class="phone-label-dropdown" formControlName="label">
+          <option *ngFor="let label of phoneLabels" [value]="label">{{label}}</option>
+        </select>
+        <input formControlName="phone" type="text" placeholder="Enter Phone Number" id="phone-{{i}}">
         <button class="remove-button" (click)="removePhone(i)" type="button">-</button>
       </div>
     </div>
