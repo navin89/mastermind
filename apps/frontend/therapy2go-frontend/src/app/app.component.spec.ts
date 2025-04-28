@@ -1,22 +1,36 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { RouterModule } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ApiService } from './services/api.service';
+import { NGXLogger } from 'ngx-logger';
+import { of } from 'rxjs';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations, provideNoopAnimations } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
+
+  const mockApiService = {
+    getProductData: jasmine.createSpy('getProductData').and.returnValue(of({})),
+    getTestIp: jasmine.createSpy('getTestIp').and.returnValue(of({}))
+  };
+
+  const mockLogger = {
+    info: jasmine.createSpy('info')
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, NxWelcomeComponent, RouterModule.forRoot([])],
+      imports: [AppComponent, RouterModule.forRoot([])],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        provideAnimationsAsync(),
+        provideAnimations(),
+        provideNoopAnimations(),
+        { provide: ApiService, useValue: mockApiService },
+        { provide: NGXLogger, useValue: mockLogger }
+      ],
     }).compileComponents();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome therapy2go-frontend'
-    );
   });
 
   it(`should have as title 'therapy2go-frontend'`, () => {

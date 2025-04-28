@@ -11,7 +11,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { NGXLogger } from 'ngx-logger';
 
 @Component({
-  selector: 'app-home.component',
+  selector: 'app-home',
   imports: [
     CommonModule,
     // Angular Material
@@ -26,6 +26,7 @@ import { NGXLogger } from 'ngx-logger';
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  standalone: true,
 })
 export class HomeComponent implements OnInit {
   isMenuCollapsed = false;
