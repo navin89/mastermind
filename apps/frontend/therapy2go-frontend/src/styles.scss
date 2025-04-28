@@ -4,46 +4,77 @@
 
 @include mat.core();
 
-$primary: mat.m2-define-palette(mat.$m2-amber-palette);
-$therapienow-accent: mat.m2-define-palette(mat.$m2-pink-palette);
+:root {
+  --color-primary: #004859;
+  --color-accent: #ff8888;
+  --color-accent-secondary: #ffc15a;
+  --color-accent-secondary-darker: #faa415;
+  --color-success: #4caf50;
+  --color-error: #ff5722;
+  --color-info: #449eff;
+  --color-background: #eceff1;
+  --color-main-background: white;
+  --color-text: #263238;
+  --color-text-light: #607d8b;
+  --height-header: 64px;
+  --height-footer: 48px;
+  --border-radius: 10px;
+  --spacing-step: 8px;
+  --font-size-h1: 34px;
+}
 
-// Extra Colors
-$therapienow-success: mat.m2-define-palette(mat.$m2-green-palette);
-$therapienow-info: mat.m2-define-palette(mat.$m2-blue-palette);
+button {
+  margin-top: calc(var(--spacing-step) * 2);
+  background-color: var(--color-accent-secondary);
+  border: var(--color-accent-secondary-darker) 1px solid;
+  color: var(--color-text);
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    background-color: var(--color-accent-secondary-darker);
+    border: var(--color-accent-secondary) 1px solid;
+  }
+  &.reset-button {
+    background-color: transparent;
+    border: var(--color-primary) 1px solid;
+  }
+}
 
-$therapienow-theme: mat.m2-define-light-theme(
-    (
-      color: (
-        primary: $primary,
-        accent: $therapienow-accent,
-      )
-    )
-);
-
-$therapienow-theme: map.deep-merge($therapienow-theme, (
-  success: $therapienow-success,
-  info: $therapienow-info,
-  color: (
-    success: $therapienow-success,
-    info: $therapienow-info
-  )
-));
-
-//@debug $therapienow-theme;
-
-@include mat.all-component-themes($therapienow-theme);
+select {
+  width: 100%;
+}
 
 // min-height is stretched to the full minimal viewport height
 // flexbox is used to turn it into a container using the vertical main axis
-html {
-  min-height: 100%;
-  flex-direction: column;
-  display: flex;
-}
+//html {
+//  min-height: 100%;
+//  flex-direction: column;
+//  display: flex;
+//}
 
 // flex value is set to 1; to stretch it through the html height
-body {
-  padding-top: 66px;
+body, html {
+  padding-top: 50px;
+  margin: 0;
   flex: 1;
+  display: flex;
+  flex-direction: column;
   font-family: Roboto, "Lucida Grande", sans-serif;
+  background-color: var(--color-main-background);
+}
+
+p, h1, h2, h3, h4, h5, span {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }

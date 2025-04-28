@@ -12,6 +12,8 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 })
 export class TherapienowFormComponent implements OnInit {
 
+  phoneLabels = ['Main', 'Mobile', 'Work', 'Home'];
+
   form= new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
@@ -22,7 +24,10 @@ export class TherapienowFormComponent implements OnInit {
       postcode: new FormControl(0),
     }),
     phones: new FormArray([
-      new FormControl(''),
+      new FormGroup({
+        label: new FormControl(this.phoneLabels[0]),
+        phone: new FormControl('')
+      })
     ])
   });
 
@@ -31,10 +36,20 @@ export class TherapienowFormComponent implements OnInit {
   }
 
   addPhone() {
-    this.form.controls.phones.insert(0, new FormControl());
+    this.form.controls.phones.insert(0,
+      new FormGroup({
+        label: new FormControl(this.phoneLabels[0]),
+        phone: new FormControl('')
+      })
+    );
+
   }
 
   removePhone(index: number) {
     this.form.controls.phones.removeAt(index);
+  }
+
+  onSubmit(e: Event) {
+    console.log('form submitted::', this.form.value);
   }
 }
