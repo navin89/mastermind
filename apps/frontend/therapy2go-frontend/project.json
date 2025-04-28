@@ -133,12 +133,11 @@
       "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "jestConfig": "apps/frontend/therapy2go-frontend/jest.config.ts"
+        "karmaConfig": "apps/frontend/therapy2go-frontend/karma.conf.js",
+        "tsConfig": "apps/frontend/therapy2go-frontend/tsconfig.spec.json",
+        "polyfills": ["zone.js", "zone.js/testing"]
       }
     },
     "serve-static": {
